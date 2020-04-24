@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import stockdata from './data/stockdata.json' 
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table-next'
 import Table from './Table.js'
 
 class Column extends Component {
