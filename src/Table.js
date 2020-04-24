@@ -1,6 +1,5 @@
 import React, {Fragment, Component} from 'react'
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table-next'
-import stockdata from './data/stockdata.json' 
+import Table from 'react-bootstrap/Table'
 
 // class Table extends Component {
 //     constructor(props){
@@ -19,14 +18,32 @@ import stockdata from './data/stockdata.json'
 // }
 
 
-const Table = (props) => {
+const BootstrapTable = (props) => {
     return (
+        
         <div>
-            Pass data as props to me
-            
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>#</th>
+                        <th>#</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </Table>
+
         </div>
 
     )
 }
 
-export default Table;
+export default BootstrapTable;

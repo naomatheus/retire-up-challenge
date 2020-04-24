@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import stockdata from './data/stockdata.json' 
-import Table from './Table.js'
+import BootstrapTable from './Table.js'
 
 class Column extends Component {
     constructor(props){
@@ -22,7 +22,7 @@ class Column extends Component {
         const mappedData = this.state.data.map((data) => {
             console.log(data)
 
-            
+            return data
         })
         
         
@@ -36,7 +36,7 @@ class Column extends Component {
         return (
             <Fragment>
                 <div>Table will go here inside of Column component</div>
-                <Table props={this.state.data}/>
+                <BootstrapTable/>
             </Fragment>
         )
     }
