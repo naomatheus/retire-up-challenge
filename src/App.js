@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navigation from './Navigation.js'
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 
 import 'rc-slider/assets/index.css'

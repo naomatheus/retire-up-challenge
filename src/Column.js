@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 
-const Column = (props) => {
-    return (
-        <div>Column Component
 
-            <div>Table will go here inside of colun component</div>
+class Column extends Component {
+    constructor(props){
+        super(props)
 
-        </div>
-        
-    )
+        this.state = {
+            isFetching: false,
+            data: this.data
+        }
+    }
+
+    render() {
+        return (
+
+            <div>Table will go here inside of Column component</div>
+        )
+    }
+
+
+
 }
 
 export default Column;
