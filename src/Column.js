@@ -20,7 +20,7 @@ class Column extends Component {
         // use map() to loop over all items in JSON obj
 
         const mappedData = this.state.data.map((data) => {
-            console.log(data)
+            // console.log(data)
 
             return data
         })
@@ -36,7 +36,7 @@ class Column extends Component {
         return (
             <Fragment>
                 <div>Table will go here inside of Column component</div>
-                <BootstrapTable/>
+                < BootstrapTable props={this.state.data}/>
             </Fragment>
         )
     }

@@ -19,25 +19,48 @@ import Table from 'react-bootstrap/Table'
 
 
 const BootstrapTable = (props) => {
+
+    console.table(props.props[0]) 
+    // props is an object with property called props, props property contains an array of objects with year/return data
+    
+    // access the array within props, and use object references to access each data element
+    // props.props.forEach((item) => {
+    //     console.table(item.year,item.totalReturn)
+    // })
+
+    let tableYears = props.props.map((item) => {
+        return (
+            <tr key={item.year.toString()}>
+                {item.year}
+            </tr>
+        )
+    })
+    let tableReturn = props.props.map((item) => {
+        let intYear = parseInt(item.year)
+        console.log(typeof(intYear))
+        return (
+            <tr key={Math.random()}>{intYear}</tr>
+        )
+    })
     return (
-        
+
         <div>
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>#</th>
-                        <th>#</th>
-                        <th>#</th>
+                        
+                        <th>Year</th>
+                        <th>Total Return</th>
+                        
                     </tr>
+                    
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
+                    {tableYears}
+                    
+                </tbody>
+                <tbody>
+                    {tableReturn}
                 </tbody>
             </Table>
 
