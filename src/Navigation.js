@@ -13,43 +13,50 @@ class Navigation extends Component {
             
             data: stockdata,
             sliderMin:0,
-            sliderMax: 100
+            sliderMax: 100,
+            setValues : {
+                // access the year values in data
+                min : 0,
+                max: 0,
+                // create pseudo properties in this object using get syntax
+
+                checkData () {
+                    for (let i = 0; i < stockdata.length; i++) {
+                        console.log(stockdata[i].year);
+                        this.min = Math.min(stockdata[i].year);
+                        // set min as lowest year value
+                        this.max = Math.max(stockdata[i].year);
+                        // set max as highest year value
+                        if (i === stockdata.length - 1) {
+                            // when i is at the end of stockdata array, set values in state
+                            console.log(this.min,this.max);
+                        }
+                        // console.log(this.state.sliderMin);
+                    }
+                }
+        
+                
+            }
         }
     
     }
 
-    _mapRangeMinMax = (stockdata) => {
-        // access the year values in data
-        let data = this.state.data;
+    
+    // get mapRangeMinMax() {
+    //     return this._mapRangeMinMax;
+    // }
+    // set mapRangeMinMax(value) {
+    //     this._mapRangeMinMax = value;
+    // }
 
-        // create pseudo properties in this object using get syntax
-        
-        for (let i = 0; i < data.length; i++) {
-            console.log(data[i].year);
-            let min = Math.min(data[i].year);
-            // set min as lowest year value
-            let max = Math.max(data[i].year);
-            // set max as highest year value
-            if (i === data.length - 1) {
-                // when i is at the end of stockdata array, set values in state
-                console.log('hit');
-                this.setState({
-                    sliderMin: min,
-                    sliderMax: max
-                });
-            }
-            console.log(this.state.sliderMin);
-        }
-    };
-    get mapRangeMinMax() {
-        return this._mapRangeMinMax;
-    }
-    set mapRangeMinMax(value) {
-        this._mapRangeMinMax = value;
-    }
+    componentWillMount(){
+        this.state.setValues.checkData()
 
-    componentDidMount(){
-        this.mapRangeMinMax()
+        this.setState({
+            sliderMin: this.state.setValues.min,
+            sliderMax: this.state.setValues.max
+        })
+
     }
     render(){
         return(
@@ -61,7 +68,7 @@ class Navigation extends Component {
                     
                     <div className='nav-table-row--responsive'>
                         
-                        <Column />
+                        <Column min={this.state.sliderMin} max={this.state.sliderMax} />
                         <Card />
                         <Card />
                         <Card />

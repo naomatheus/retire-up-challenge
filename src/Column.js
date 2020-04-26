@@ -19,8 +19,8 @@ class Column extends Component {
         this.state = {
             data: stockdata,
             dataCache: stockdata,
-            sliderMin: 0,
-            sliderMax: 100
+            // sliderMin: 0,
+            // sliderMax: 100
         }
     }
 
@@ -59,14 +59,18 @@ class Column extends Component {
 
     componentDidMount(){
         // this.mapStockData();
-        this.mapRangeMinMax()
+        // this.mapRangeMinMax()
+        
     }
 
     render() {
+
+        console.log(this.props.min)
+
         return (
             <Fragment>
                 <div>Table will go here inside of Column component</div>
-                < Range min={0} max={100} defaultValue={[this.state.sliderMin,this.state.sliderMax]} tipFormatter={value => `${value}`}/>
+                < Range min={this.props.min} max={this.props.max} defaultValue={[this.props.min,this.props.max]} tipFormatter={value => `${value}`}/>
                 < BootstrapTable props={this.state.data}/>
             </Fragment>
         )
