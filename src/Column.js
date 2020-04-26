@@ -1,14 +1,22 @@
 import React, { Component, Fragment } from 'react';
 import stockdata from './data/stockdata.json' 
 import BootstrapTable from './Table.js'
+import Slider from 'rc-slider'
 import {Range} from 'rc-slider'
+import 'rc-slider/assets/index.css'
+import 'rc-tooltip/assets/bootstrap.css'
+import Tooltip from 'rc-tooltip'
+
+const createSliderWithTooltip = Slider.createSliderWithTooltip;
+Range = createSliderWithTooltip(Slider.Range)
 
 class Column extends Component {
     constructor(props){
         super(props)
 
         this.state = {
-            data: stockdata
+            data: stockdata,
+            dataCache: stockdata
         }
     }
 
@@ -27,6 +35,11 @@ class Column extends Component {
         })
         
         
+    }
+
+    filterData = () => {
+        let filteredData = this.state.dataCache
+
     }
 
     componentDidMount(){
