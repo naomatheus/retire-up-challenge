@@ -24,39 +24,33 @@ class Column extends Component {
         }
     }
 
-    mapRangeMinMax = () => {
+    // mapRangeMinMax = () => {
 
-        // access the year values in data
-        let data = this.state.data
+    //     // access the year values in data
+    //     let data = this.state.data
         
-        for (let i = 0; i < data.length; i++){
-            console.log(data[i].year)
+    //     for (let i = 0; i < data.length; i++){
+    //         console.log(data[i].year)
             
-            let min = Math.min(data[i].year)
-            // set min as lowest year value
+    //         let min = Math.min(data[i].year)
+    //         // set min as lowest year value
             
-            let max = Math.max(data[i].year)
-            // set max as highest year value
+    //         let max = Math.max(data[i].year)
+    //         // set max as highest year value
             
-            if (i === data.length-1){
-                // when i is at the end of stockdata array, set values in state
-                console.log('hit')
-                this.setState({
-                    sliderMin: min,
-                    sliderMax: max
-                })
-            }
+    //         if (i === data.length-1){
+    //             // when i is at the end of stockdata array, set values in state
+    //             console.log('hit')
+    //             this.setState({
+    //                 sliderMin: min,
+    //                 sliderMax: max
+    //             })
+    //         }
 
-            console.log(this.state.sliderMin)
+    //         console.log(this.state.sliderMin)
 
-        }
-        
-        
-        
-        
-        // 
-        
-    }
+    //     }
+    // }
 
     filterData = () => {
         let filteredData = this.state.dataCache
