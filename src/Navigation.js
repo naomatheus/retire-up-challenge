@@ -21,21 +21,19 @@ class Navigation extends Component {
                 // create pseudo properties in this object using get syntax
 
                 checkData () {
+                    let temp = []
+
                     for (let i = 0; i < stockdata.length; i++) {
-                        console.log(stockdata[i].year);
-                        this.min = Math.min(stockdata[i].year);
-                        // set min as lowest year value
-                        this.max = Math.max(stockdata[i].year);
-                        // set max as highest year value
-                        if (i === stockdata.length - 1) {
-                            // when i is at the end of stockdata array, set values in state
-                            console.log(this.min,this.max);
-                        }
-                        // console.log(this.state.sliderMin);
+                        // push each element of stockdata into array 
+                        temp.push(stockdata[i].year)
+
                     }
+                    this.min = Math.min(...temp)
+                    // set min as lowest year value
+                    this.max = Math.max(...temp)
+                    // set max as highest year value
+                    console.log(Math.min(...temp))
                 }
-        
-                
             }
         }
     
