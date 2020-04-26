@@ -14,26 +14,47 @@ class Column extends Component {
     constructor(props){
         super(props)
 
+        // this.mapRangeMinMax = {}
+
         this.state = {
             data: stockdata,
-            dataCache: stockdata
+            dataCache: stockdata,
+            sliderMin: 0,
+            sliderMax: 100
         }
     }
 
-    mapStockData = () => {
-        // set isMapping to true
-        this.setState({
-            ...this.state,
-            isMapping: true,
-        })
-        // use map() to loop over all items in JSON obj
+    mapRangeMinMax = () => {
 
-        const mappedData = this.state.data.map((data) => {
-            // console.log(data)
-
-            return data
-        })
+        // access the year values in data
+        let data = this.state.data
         
+        for (let i = 0; i < data.length; i++){
+            console.log(data[i].year)
+            
+            let min = Math.min(data[i].year)
+            // set min as lowest year value
+            
+            let max = Math.max(data[i].year)
+            // set max as highest year value
+            
+            if (i === data.length-1){
+                // when i is at the end of stockdata array, set values in state
+                console.log('hit')
+                this.setState({
+                    sliderMin: min,
+                    sliderMax: max
+                })
+            }
+
+            console.log(this.state.sliderMin)
+
+        }
+        
+        
+        
+        
+        // 
         
     }
 
@@ -43,14 +64,15 @@ class Column extends Component {
     }
 
     componentDidMount(){
-        this.mapStockData();
+        // this.mapStockData();
+        this.mapRangeMinMax()
     }
 
     render() {
         return (
             <Fragment>
                 <div>Table will go here inside of Column component</div>
-                < Range />
+                < Range min={0} max={100} defaultValue={[this.state.sliderMin,this.state.sliderMax]} tipFormatter={value => `${value}`}/>
                 < BootstrapTable props={this.state.data}/>
             </Fragment>
         )
