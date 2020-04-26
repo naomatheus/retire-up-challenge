@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import stockdata from './data/stockdata.json' 
 import BootstrapTable from './Table.js'
+import {Range} from 'rc-slider'
 
 class Column extends Component {
     constructor(props){
@@ -36,6 +37,7 @@ class Column extends Component {
         return (
             <Fragment>
                 <div>Table will go here inside of Column component</div>
+                < Range />
                 < BootstrapTable props={this.state.data}/>
             </Fragment>
         )
