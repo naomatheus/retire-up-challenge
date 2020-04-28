@@ -1,23 +1,6 @@
 import React, {Fragment, Component} from 'react'
 import Table from 'react-bootstrap/Table'
 
-// class Table extends Component {
-//     constructor(props){
-//         super(props)
-//     }
-
-//     render() {
-//         return (
-            
-//             <div>Table here
-                
-//             </div>
-
-//         )
-//     }
-// }
-
-
 const BootstrapTable = (props) => {
 
     console.table(props.props[0]) 

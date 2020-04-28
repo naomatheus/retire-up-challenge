@@ -15,45 +15,63 @@ class Column extends Component {
         super(props)
 
         // this.mapRangeMinMax = {}
+        this.wrapper = React.createRef();
 
         this.state = {
             data: stockdata,
             dataCache: stockdata,
+            isFiltering : false
             // sliderMin: 0,
             // sliderMax: 100
         }
     }
 
-    // mapRangeMinMax = () => {
-
-    //     // access the year values in data
-    //     let data = this.state.data
-        
-    //     for (let i = 0; i < data.length; i++){
-    //         console.log(data[i].year)
-            
-    //         let min = Math.min(data[i].year)
-    //         // set min as lowest year value
-            
-    //         let max = Math.max(data[i].year)
-    //         // set max as highest year value
-            
-    //         if (i === data.length-1){
-    //             // when i is at the end of stockdata array, set values in state
-    //             console.log('hit')
-    //             this.setState({
-    //                 sliderMin: min,
-    //                 sliderMax: max
-    //             })
-    //         }
-
-    //         console.log(this.state.sliderMin)
-
-    //     }
-    // }
-
-    filterData = () => {
+    filterData = (e) => {
         let filteredData = this.state.dataCache
+        /// filteredData is received from a cache copy of the original dataset
+        console.log('...filtering',e) // filter receives year range values from the range
+        this.setState({
+            isFiltering: true
+        })
+        /// filter checks and only passes years within the range set within the slider
+        
+        // filter for min from beginning j++
+        for (let i = 0; i < filteredData.length; i++){
+
+            console.log(filteredData[i].year)                
+            if (filteredData[i].year < e[0]){
+                // reducing year scope from end
+                filteredData = filteredData.splice((filteredData.length-1),1)
+            } 
+            
+            else if (filteredData[i].year > e[1]){
+                // reducing year scope in table from the beginning
+                console.log(`${e[1]} is greater  than or equal to ${filteredData[i].year} filteredData`)
+                
+                console.log(filteredData,'<-- just before setting state in filter function')
+                
+                
+                let firstIndx = filteredData[i].year - e[1]
+                /* distance from i to 0 */ 
+                filteredData = filteredData.splice(i,firstIndx)
+                // splice number of elements from i to 0th
+            }
+        }
+        
+
+        console.log(this.state.dataCache,'<-- filtered data in state')
+            
+        if (this.setState.isFiltering === true) {
+            for (let i = 0; i < e.length; i++){
+                // set limits on the cached data 
+
+                // access the filteredData variable that is a copy of all stockdata
+
+            }
+
+        }
+        
+
 
     }
 
@@ -70,8 +88,15 @@ class Column extends Component {
         return (
             <Fragment>
                 <div>Table will go here inside of Column component</div>
-                < Range min={this.props.min} max={this.props.max} defaultValue={[this.props.min,this.props.max]} tipFormatter={value => `${value}`}/>
+                < Range ref={this.wrapper} onChange={this.filterData} onAfterChange={this.filterData} min={this.props.min} max={this.props.max} defaultValue={[this.props.min,this.props.max]} tipFormatter={value => `${value}`}/>
                 < BootstrapTable props={this.state.data}/>
+
+                { this.state.isFiltering ? 
+                    
+
+                    <BootstrapTable props={this.state.dataCache}/>
+                
+                : false }
             </Fragment>
         )
     }
