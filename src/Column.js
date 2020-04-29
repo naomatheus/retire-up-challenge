@@ -20,7 +20,8 @@ class Column extends Component {
         this.state = {
             data: stockdata,
             dataCache: stockdata,
-            isFiltering : false
+            isFiltering : false,
+            isUnfiltering: false
             // sliderMin: 0,
             // sliderMax: 100
         }
@@ -31,7 +32,8 @@ class Column extends Component {
         /// filteredData is received from a cache copy of the original dataset
         console.log('...filtering',e) // filter receives year range values from the range
         this.setState({
-            isFiltering: true
+            isFiltering: true,
+            isUnfiltering: false
         })
         /// filter checks and only passes years within the range set within the slider
         
@@ -41,7 +43,13 @@ class Column extends Component {
             console.log(filteredData[i].year)                
             if (filteredData[i].year < e[0]){
                 // reducing year scope from end
-                filteredData = filteredData.splice((filteredData.length-1),1)
+
+                // distance from i to end of data set (filteredData.length)
+                // calc using year values
+                let toLastIndx = filteredData[i].year - filteredData[filteredData.length-1].year
+                // console.log(toLastIndx)
+                filteredData = filteredData.splice(i,toLastIndx+1)
+                // splice number of elements from i to nth
             } 
             
             else if (filteredData[i].year > e[1]){
@@ -57,21 +65,29 @@ class Column extends Component {
                 // splice number of elements from i to 0th
             }
         }
-        
 
         console.log(this.state.dataCache,'<-- filtered data in state')
-            
-        if (this.setState.isFiltering === true) {
-            for (let i = 0; i < e.length; i++){
-                // set limits on the cached data 
 
-                // access the filteredData variable that is a copy of all stockdata
+    }
 
+    unfilterData = (e) => {
+        console.log('...unfiltering')
+        let data = this.state.data
+        let filteredData = this.state.dataCache
+        this.setState({
+            isFiltering: false,
+            isUnfiltering: true
+        })
+
+        for (let i = 0; i < data.length;i++){
+            if (data[i].year < e[0]){
+                filteredData.unshift(data[i])
+
+            } else if (data[i].year >= e[1]){
+                filteredData.push(data[i])
             }
-
         }
-        
-
+        console.log(this.state.dataCache, '<-- unfiltered data in state')
 
     }
 
