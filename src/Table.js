@@ -3,12 +3,7 @@ import Table from 'react-bootstrap/Table'
 
 const BootstrapTable = (props) => {
 
-    console.table(props.props[0]) 
-    // props is an object with property called props, props property contains an array of objects with year/return data
-    
-    // access the array within props, and use object references to access each data element
-
-    // in one mapping function, create the two <tr> elements and return them separately
+    // props is an object with property called props, props property contains an array of objects with year/return data    
 
     let tableEles = props.props.map((item) => {
         return (
@@ -21,9 +16,9 @@ const BootstrapTable = (props) => {
                     </tr>
                     </td>
                     <td>
-                    <tr key={Math.random()}>
-                        {item.totalReturn}
-                    </tr>
+                        <tr key={Math.random()}>
+                            {item.totalReturn}
+                        </tr>
                     </td>
                 </div>
             

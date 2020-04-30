@@ -39,15 +39,8 @@ class Navigation extends Component {
     
     }
 
-    
-    // get mapRangeMinMax() {
-    //     return this._mapRangeMinMax;
-    // }
-    // set mapRangeMinMax(value) {
-    //     this._mapRangeMinMax = value;
-    // }
-
     componentWillMount(){
+        // sets values in the slider based on data set
         this.state.setValues.checkData()
 
         this.setState({
@@ -60,16 +53,14 @@ class Navigation extends Component {
         return(
             <Fragment>
                 
-                <div className='nav-container--maxwidth'>Navigation Top layer
-                    < Row />
-                    <div className='nav-table row--static'>Stock Information in Navigation component</div>
+                <div className='nav-container--maxwidth'>Navigation
+                    
+                    <div className='nav-table row--static'>Stock Information</div>
                     
                     <div className='nav-table-row--responsive'>
                         
                         <Column min={this.state.sliderMin} max={this.state.sliderMax} />
-                        <Card />
-                        <Card />
-                        <Card />
+                        
 
                     </div>
 
