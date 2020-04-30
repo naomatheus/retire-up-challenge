@@ -21,7 +21,9 @@ class Column extends Component {
             data: stockdata,
             dataCache: stockdata,
             isFiltering : false,
-            isUnfiltering: false
+            isUnfiltering: false,
+            range1: this.range1,
+            range2: this.range2
             // sliderMin: 0,
             // sliderMax: 100
         }
@@ -29,44 +31,64 @@ class Column extends Component {
 
     filterData = (e) => {
         let filteredData = this.state.dataCache
+        let data = this.state.data
         /// filteredData is received from a cache copy of the original dataset
-        console.log('...filtering',e) // filter receives year range values from the range
-        this.setState({
-            isFiltering: true,
-            isUnfiltering: false
-        })
-        /// filter checks and only passes years within the range set within the slider
+        // function filterData receives year range values from the range
+       
+        let temp = []
+        temp.push(e[0],e[1])
         
-        // filter for min from beginning j++
-        for (let i = 0; i < filteredData.length; i++){
+        let range1 = temp[1] - temp[0]
+        if (this.state.isFiltering === false){
+            this.setState({
+                range1:range1,
+                isFiltering: true,
+                isUnfiltering: false
+            })
+       }
+        /// filter checks and only passes years within the range set within the slider
+        console.log('...filtering',e) 
+        console.log(range1,'range1')
 
-            console.log(filteredData[i].year)                
+        // filter for min from beginning j++
+        for (let i = 0; i < filteredData.length; i++){         
+            // on the first 
+            
+
+
             if (filteredData[i].year < e[0]){
                 // reducing year scope from end
-
                 // distance from i to end of data set (filteredData.length)
                 // calc using year values
                 let toLastIndx = filteredData[i].year - filteredData[filteredData.length-1].year
                 // console.log(toLastIndx)
                 filteredData = filteredData.splice(i,toLastIndx+1)
-                // splice number of elements from i to nth
-            } 
-            
-            else if (filteredData[i].year > e[1]){
+                // splice number of elements from i to nth 
+            } else if (filteredData[i].year > e[1]){
                 // reducing year scope in table from the beginning
-                console.log(`${e[1]} is greater  than or equal to ${filteredData[i].year} filteredData`)
-                
-                console.log(filteredData,'<-- just before setting state in filter function')
-                
-                
                 let firstIndx = filteredData[i].year - e[1]
                 /* distance from i to 0 */ 
                 filteredData = filteredData.splice(i,firstIndx)
                 // splice number of elements from i to 0th
-            }
+            } 
         }
+        let temp2 = []
+        temp2.push(e[0],e[1])
+        let range2 = temp2[1] - temp2[0]
 
-        console.log(this.state.dataCache,'<-- filtered data in state')
+        
+
+        // if range is larger after filteringEvents, add elements back
+        this.setState({
+            isFiltering: false
+        })
+
+        console.log(this.state.range1,'<--range1')
+        this.checkRange()
+
+    }
+
+    checkRange = () => {
 
     }
 
@@ -87,7 +109,7 @@ class Column extends Component {
                 filteredData.push(data[i])
             }
         }
-        console.log(this.state.dataCache, '<-- unfiltered data in state')
+        // console.log(this.state.dataCache, '<-- unfiltered data in state')
 
     }
 
@@ -98,8 +120,6 @@ class Column extends Component {
     }
 
     render() {
-
-        console.log(this.props.min)
 
         return (
             <Fragment>
